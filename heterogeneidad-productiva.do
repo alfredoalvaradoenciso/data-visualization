@@ -2,7 +2,7 @@ clear all
 set more off, perma
 
 gl enaho "C:\Users\Dell\Desktop\Bases\ENAHO"
-gl do "https://raw.githubusercontent.com/alfredoalvaradoenciso/ENAHO/main"
+gl do "C:\Users\Dell\Documents\GitHub\ENAHO"
 gl result "C:\Users\Dell\Downloads"
 cd "$result"
 
@@ -125,45 +125,3 @@ graph twoway (line lprodtot p_emp if anio==2007) ///
 	text(260 90.4099 "Minería", color(black)) ///
 	legend(order(1 "2007" 2 "2021") )
 graph export  "grafico_heterogenidad4.emf",replace
-
-
-
-/*
-g position=.
-replace position=10 if label_sector=="Agropecuario"
-replace position=10 if label_sector=="Otros servicios"
-replace position=12 if label_sector=="Tranporte y comunicacion"
-replace position=10 if label_sector=="Construccion"
-replace position=9 if label_sector=="Minería"
-replace position=3 if label_sector=="Pesca"
-replace position=10 if label_sector=="Manufactura"
-
-set scheme s1color
-graph twoway (line lprodtot p_emp if anio==2007) ///
-	(scatter lprodtot p_emp if anio==2014  ,   c(l) msymbol(none)  mlabvposition(position) /// 
-	mlabpos(12) mlabgap(*4)) ///
-	(pcarrowi 30 55 17.04 75) ///
-	(pcarrowi 40 65 28.04 75) ///
-	(pcarrowi 50 70 38.04 75) ///
-	(pcarrowi 60 74 42.04 85) ///
-	(pcarrowi 70 81 48.04 95) ///
-	, ylabel(0(20)100,angle(0)) ///
-	title("Peru: Evolucion de la Productividad Media," "por sectores, 2007-2014  1/") ///
-	note("1/ La poblacion empleada por sectores es tomada de las ENAHO de 2007 y 2014." "Fuente: INEI. Elaboración: DEMI", size(*1) justification(left) position(7))  ///
-	ytitle("Valor Agregado por trabajador" "(Miles de nuevos soles de 2007)") xtitle("% acumulado de la fuerza laboral") ///
-	text(14 10 "Agropecuario", 	size(small) color(black)) ///
-	text(28 23.5999 "Hoteles y" "Restaurantes", size(small) color(black)) ///
-	text(23 42.9799 "Comercio", size(small) color(black)) ///
-	text(33 55.4099 "Otros Servicios", size(small) color(black)) ///
-	text(43 65.4099 "Pesca", size(small) color(black)) ///
-	text(53 65.4099 "Construccion", size(small) color(black)) ///	
-	text(63 65.4099 "Transporte y comunicacion", size(small) color(black)) ///	
-	text(73 75.4099 "Manufacfura", size(small) color(black)) ///	
-	text(93 90.4099 "Minería", size(small) color(black)) ///
-	legend(order(1 "2007" 2 "2014") )
-graph export  "grafico_heterogenidad3.emf",replace
-
-
-
-
-
