@@ -90,20 +90,9 @@ replace label_sector=sector if anio==2013 & aux_one==1
 sort anio p_emp
 replace lprodtot=lprodtot/1000
 
-
-g position=.
-replace position=10 if label_sector=="Agropecuario"
-replace position=10 if label_sector=="Otros servicios"
-replace position=12 if label_sector=="Servicios gubernamentales"
-replace position=10 if label_sector=="Construccion"
-replace position=9 if label_sector=="Minería"
-replace position=3 if label_sector=="Pesca"
-replace position=10 if label_sector=="Manufactura"
-
 set scheme s1color
 graph twoway (line lprodtot p_emp if anio==2007) ///
-	(scatter lprodtot p_emp if anio==2021  ,   c(l) msymbol(none)  mlabvposition(position)  /// 
-	mlabpos(12) mlabgap(*4)) ///
+	(scatter lprodtot p_emp if anio==2021  ,   c(l) msymbol(none)  ) ///
 	(pcarrowi 50 40 29.04 46) ///
 	(pcarrowi 77 44 37.04 50) ///
 	(pcarrowi 98 54 47.04 57) ///
