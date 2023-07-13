@@ -29,3 +29,5 @@ treemap(spending, #Your data frame object
         force.print.labels=TRUE,
         overlap.labels = 1
 )
+
+
