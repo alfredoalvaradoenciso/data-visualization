@@ -1,6 +1,7 @@
 # Data-visualization
 
 Heat plot
+
 <img src="img\heat.png" alt="Heat plot of governance indicators in LAC countries">
 
 Dot graph
