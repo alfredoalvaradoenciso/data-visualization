@@ -18,5 +18,4 @@ Transicion de trabajadores informales entre 2017 y 2021
 <img src="img\transicion-informal.png" alt="Transicion de trabajadores informales entre 2017 y 2021">
 
 Spider plot
-
 <img src="img\spider.png" alt="Percentile rank of governance indicators in LAC and other regions">
