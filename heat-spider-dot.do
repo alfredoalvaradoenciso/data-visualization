@@ -30,7 +30,6 @@ levelsof col, local(col_levels)
 	 foreach val of local col_levels {   
       	 local colvl`val' : label col `val'    
        }
-
 keep var value col
 sort value
 reshape wide value, i(var) j(col)
