@@ -2,7 +2,6 @@ global root "C:\Users\Dell\Downloads\graphswbg"
 
 cd "$root"
 
-
 *HEAT PLOT
 global y2 "2021"
 global vars "cce gee pve rqe rle vae"
@@ -48,12 +47,10 @@ graph export "$root\heat.png", replace
 
 *SPIDER GRAPH
 global y2 "2021"
-*global weight "[iw=_pop_2]"
 global weight "[iw=1]"
 global vars "ccr ger pvr rqr rlr var"
 use "$root\WGI2", clear
 keep if year==$y2
-*decode code2, gen(Region)
 preserve
 collapse (mean) $vars $weight
 gen Region="World"
@@ -92,7 +89,6 @@ sort id
 radar vars LAC EAP World ECA, title("Percentile Rank (0=lowest rank, 100=highest rank), $y2") lc(red navy forest_green dkorange) lp(solid dash shortdash solid) lw(*2 *2 *2 *2)  graphregion(color(white))  r(30 30 40 50 60)  aspect(0.6) legend(order(1 "LAC" 2 "EAP" 3 "World" 4 "ECA") rows(1))    note("Source: Worldwide Governance Indicators")
 graph export "$root\spider.png", replace
 
-***
 
 ** DOT GRAPH
 
@@ -122,12 +118,6 @@ restore
 collapse (mean) own=$value $weight, by(codelac year)
 append using  `world'
 append using  `lac'
-*append using  `lacnobrazil'
-*append using  `eca'
-/*recode codelac 9=2 8=1 7=3 6=4 5=5 4=6 3=7 2=8 1=9, gen(codelac2)
-lab def codelac2 1 "World" 2 "ECA" 3 "EAP" 4 "LAC" 5 "Caribbean" 6 "Central America"  7 "Mexico" 8 "South cone" 9 "Andean countries"  
-lab val codelac2 codelac2
-*/
 drop if codelac==.
 drop if codelac==5
 replace own=own
