@@ -2,8 +2,9 @@ clear all
 set more off, perma
 
 gl enaho "C:\Users\Dell\Desktop\Bases\ENAHO"
-gl do "C:\Users\Dell\Documents\GitHub\ENAHO"
+gl img "C:\Users\Dell\Documents\GitHub\data-visualization\img"
 gl result "C:\Users\Dell\Downloads"
+
 cd "$result"
 
 foreach a in 2007 2021 {
@@ -124,4 +125,4 @@ graph twoway (line lprodtot p_emp if anio==2007) ///
 	text(89 80.4099 "Manufactura", color(black)) ///	
 	text(260 90.4099 "Minería", color(black)) ///
 	legend(order(1 "2007" 2 "2021") )
-graph export  "grafico_heterogenidad4.emf",replace
+graph export  "$img\grafico_heterogenidad4.png",replace
