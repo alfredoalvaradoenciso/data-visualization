@@ -1,4 +1,5 @@
-global root "C:\Users\Dell\Downloads\graphswbg"
+gl root "C:\Users\Dell\Downloads\graphswbg"
+gl img "C:\Users\Dell\Documents\GitHub\data-visualization\img"
 
 cd "$root"
 
@@ -41,7 +42,7 @@ mkmat VEN-URY, matrix(A)
 mat rownames A = "Control of Corruption" "Government Effectiveness" "Political Stability" "Regulatory Quality" "Rule of Law" "Voice & Accountability"
 heatplot A,  color(, intensity(.7)) nolabel xlabel(,angle(90))  graphregion(color(white))   aspectratio(0.4) levels(8) legend(off) name(a, replace)
 graph combine a, title(Heat plot of governance indicators in LAC countries) note("Source: Worldwide Governance Indicators. Note: Countries with darker colors are worse off.") graphregion(color(white)) 
-graph export "$root\heat.png", replace
+graph export "$img\heat.png", replace
 
 
 
@@ -87,7 +88,7 @@ replace id=7 if vars=="Regulatory Quality"
 replace id=4 if vars=="Voice & Accountability"
 sort id
 radar vars LAC EAP World ECA, title("Percentile Rank (0=lowest rank, 100=highest rank), $y2") lc(red navy forest_green dkorange) lp(solid dash shortdash solid) lw(*2 *2 *2 *2)  graphregion(color(white))  r(30 30 40 50 60)  aspect(0.6) legend(order(1 "LAC" 2 "EAP" 3 "World" 4 "ECA") rows(1))    note("Source: Worldwide Governance Indicators")
-graph export "$root\spider.png", replace
+graph export "$img\spider.png", replace
 
 
 ** DOT GRAPH
@@ -140,5 +141,5 @@ scatter codelac own$y2	, msymbol(D) legend(ring(0) position(4)) xlabel(,grid)
 ytitle("")  xtitle(`value2') title(`value3') note(`value4') graphregion(color(white)) 
 ;
 #delimit cr
-graph export "$root\dot.png", replace
+graph export "$img\dot.png", replace
 
