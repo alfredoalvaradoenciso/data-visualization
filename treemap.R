@@ -1,7 +1,6 @@
-setwd("C:/Users/ALFREDO/Dropbox/Alfredo Peru BID/ENHAT/Bases de datos/Base completa al 12.04.18/Cuadros y graficos")
 
 library(xlsx)
-data <- read.xlsx("vacantes.xlsx", sheetIndex = 1, stringsAsFactors = FALSE, encoding="UTF-8")
+data <- read.xlsx("C:/Users/Dell/Downloads/vacantes.xlsx", sheetIndex = 1, stringsAsFactors = FALSE, encoding="UTF-8")
 
 library(xtable)
 library(dplyr)
@@ -25,7 +24,7 @@ treemap(spending, #Your data frame object
         vSize = "c5_p9_3_1",  #This is your quantitative variable
         type="index", #Type sets the organization and color scheme of your treemap
         palette = "-RdBu",  #Select your color palette from the RColorBrewer presets or make your own.
-        title="Vacantes requeridas según grupos de ocupaciones", #Customize your title
+        title="Vacantes requeridas seg?n grupos de ocupaciones", #Customize your title
         fontsize.title = 14, #Change the font size of the title
 inflate.labels = TRUE,
  fontsize.labels=c(0,1),
