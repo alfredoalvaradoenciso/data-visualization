@@ -11,7 +11,6 @@ drop if _pop<500000
 keep if year==$y2
 drop year
 keep if code2==1
-
 local i =1
 foreach v of varlist $vars  {
 rename `v' value`i'
@@ -22,7 +21,6 @@ sort mean
 gen col=_n
 labmask col, val(code)
 keep col value*
-
 reshape long value, i(col ) j(vars)
 lab def vars 1 "Control of Corruption" 2 "Gov. Effectiveness" 3 "Pol. Stability" 4 "Regulatory Quality" 5 "Rule of Law" 6 "Voice & Accountability", modify
 label val vars vars
@@ -36,23 +34,18 @@ reshape wide value, i(var) j(col)
 	 foreach value of local col_levels{        
 		 rename value`value' `colvl`value''
 	 }
-	 
 mkmat VEN-URY, matrix(A)
 mat rownames A = "Control of Corruption" "Government Effectiveness" "Political Stability" "Regulatory Quality" "Rule of Law" "Voice & Accountability"
 heatplot A,  color(, intensity(.7)) nolabel xlabel(,angle(90))  graphregion(color(white))   aspectratio(0.4) levels(8) legend(off) name(a, replace)
 graph combine a, title(Heat plot of governance indicators in LAC countries) note("Source: Worldwide Governance Indicators. Note: Countries with darker colors are worse off.") graphregion(color(white)) 
 graph export "$img\heat.png", replace
 
-
-
 *SPIDER GRAPH
-global y2 "2021"
-global weight "[iw=1]"
 global vars "ccr ger pvr rqr rlr var"
 use "$root\WGI2", clear
-keep if year==$y2
+keep if year==2021
 preserve
-collapse (mean) $vars $weight
+collapse (mean) $vars
 gen Region="World"
 gen code2=3
 gen code2e=3
@@ -61,11 +54,11 @@ save `world'
 restore
 keep if code2<5 | code2==6
 preserve
-collapse (mean) $vars (count) own=vae $weight , by(code2e)
+collapse (mean) $vars (count) own=vae , by(code2e)
 tempfile e
 save `e'
 restore
-collapse (mean) $vars (count) own=vae $weight , by(Region code2)
+collapse (mean) $vars (count) own=vae , by(Region code2)
 list code2 own 
 append using `world'
 append using `e'
@@ -91,9 +84,6 @@ graph export "$img\spider.png", replace
 
 
 ** DOT GRAPH
-
-global weight "[iw=_pop_2]"
-global weight "[iw=1]"
 global y1 "2010"
 global y2 "2020"
 global y3 "2014"
@@ -101,13 +91,13 @@ use "$root\countrieswdi2", clear
 lookfor "Gini index o"
 global value="`r(varlist)'"
 preserve
-collapse (mean) own=$value $weight, by(year)
+collapse (mean) own=$value , by(year)
 gen codelac=1
 tempfile world
 save `world'
 restore
 preserve
-collapse (mean) own=$value  $weight , by(year code2)
+collapse (mean) own=$value , by(year code2)
 gen codelac=2 if code2==4
 replace codelac=3 if code2==2
 replace codelac=4 if code2==1
@@ -115,7 +105,7 @@ drop code2
 tempfile lac
 save `lac'
 restore
-collapse (mean) own=$value $weight, by(codelac year)
+collapse (mean) own=$value , by(codelac year)
 append using  `world'
 append using  `lac'
 drop if codelac==.
@@ -141,4 +131,3 @@ ytitle("")  xtitle(`value2') title(`value3') note(`value4') graphregion(color(wh
 ;
 #delimit cr
 graph export "$img\dot.png", replace
-

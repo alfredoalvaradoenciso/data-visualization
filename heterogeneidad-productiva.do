@@ -63,12 +63,10 @@ local j = 1 + `j'
 }
 
 keep if anio==2007 | anio==2021 
-
 merge 1:1 anio cat using `enaho'
 drop cat
 gen lprodtot=A*1000000/ocu500
 drop  A _m ocu500
-
 *tostring year, replace
 expand round(Semptot*10000,1)
 
@@ -90,7 +88,6 @@ keep if quedar!=0
 
 replace label_sector=sector if anio==2013 & aux_one==1
 sort anio p_emp
-
 replace lprodtot=lprodtot/1000
 
 
